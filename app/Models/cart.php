@@ -52,7 +52,7 @@ class cart extends Model
 			}
 		}
 
-       return count($array_product);
+       return 1;
 	}
 
 	//get all product for cart
