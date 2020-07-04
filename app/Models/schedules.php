@@ -217,7 +217,7 @@ class schedules extends Model
     public static function getNotify($user_id){
         $sql = DB::table('notify')
                 ->leftJoin('trips','trips.trip_id','=','notify.trip_id')
-                ->selectRaw('note,trip_name,notify.trip_id')
+                ->selectRaw('note,trip_name,notify.trip_id,notify.created_at')
                 ->where(['notify.user_id'=>$user_id,'flag'=>'0'])->get();
         return $sql;
     }
@@ -231,7 +231,7 @@ class schedules extends Model
 
         $sql = DB::table('notify')
                 ->leftJoin('trips','trips.trip_id','=','notify.trip_id')
-                ->selectRaw('note,trip_name,notify.trip_id,count(notify.user_id) as count_user_id')
+                ->selectRaw('note,trip_name,notify.trip_id,notify.created_at,count(notify.user_id) as count_user_id')
                 ->where(['notify.user_id'=>$user_id,'flag'=>'0'])->get();
         return $sql;
 
