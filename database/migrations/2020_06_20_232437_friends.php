@@ -27,6 +27,8 @@ class Friends extends Migration
             ->on('trips')
             ->onDelete('cascade'); 
 
+            $table->tinyInteger('flag')->default(0)->comment('0: accept, 1:cancel');
+
             $table->timestamps();
         }); 
     } 
