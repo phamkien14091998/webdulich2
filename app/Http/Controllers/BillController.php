@@ -113,7 +113,7 @@ class BillController extends Controller
     }
 
     public function paymentPayPalInsertData(Request $request){
-        $dataPayment = DB::table('payment')->get();
+        $dataPayment = DB::table('payment')->where('user_id',$request->user_id)->get();
        
         $array_product = DB::table('session')->where('user_id',$dataPayment[0]->user_id)->get();
 
