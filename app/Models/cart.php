@@ -33,8 +33,8 @@ class cart extends Model
 		];
 		$temp=0;
 	
-		// get sản phẩm trong bảng mới
-		$array_product = DB::table('session')->get();
+			// get sản phẩm trong bảng mới
+			$array_product = DB::table('session')->where('user_id',$user_id)->get();
 
 		if(count($array_product) < 1){ 
 
@@ -56,9 +56,9 @@ class cart extends Model
 	}
 
 	//get all product for cart
-	public static function getAllProductForCart(){ 
+	public static function getAllProductForCart($user_id){ 
 		
-		$array_product = DB::table('session')->get();
+		$array_product = DB::table('session')->where('user_id','=',$user_id)->get();
 
 		if(count($array_product) >= 1){ 
 			return $array_product;
@@ -81,8 +81,8 @@ class cart extends Model
 	}
 
 	//get tổng tiền các sản phẩm trong cart
-	public static function getTotalCart(){
-		$array_product = DB::table('session')->get();
+	public static function getTotalCart($user_id){
+		$array_product = DB::table('session')->where('user_id','=',$user_id)->get();
 
 		$totalMoney = 0;
 		foreach($array_product as $k => $v){
