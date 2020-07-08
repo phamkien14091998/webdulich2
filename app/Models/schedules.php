@@ -205,6 +205,13 @@ class schedules extends Model
         ];
         $update_friends = DB::table('trips')->where('trip_id', $trip_id)
         ->update($data2);
+
+        // tắt thông báo khi rời khỏi chuyến đi
+        $noti=[
+            'flag'=>1
+        ];
+        $updateNotify = DB::table('notify')->where(['url'=> "/member/schedule/detail/".$trip_id,'user_id'=>$user_id])
+        ->update($noti);
         
         return $update_friends;
     }
@@ -230,7 +237,7 @@ class schedules extends Model
             ->update($data);
        
             $sql = DB::table('notify')
-            ->selectRaw('note,notify.created_at,url')
+            ->selectRaw('note,notify.created_at,url,count(user_id) as count_user_id')
             ->where(['notify.user_id'=>$user_id,'flag'=>'0'])->orderBy('created_at','desc')->get();
         return $sql;
 

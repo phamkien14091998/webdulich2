@@ -136,4 +136,9 @@ class cart extends Model
 			return null;
 		}
 	}
+
+	public static function getCountGioHang($user_id){
+		return DB::table('session')->selectRaw('count(user_id) as count')->where('user_id',$user_id)->get();
+	}
+	
 }

@@ -171,6 +171,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('cart/tangSoLuongSP/{id}', 'CartController@tangSoLuongSP'); 
     Route::get('cart/giamSoLuongSP/{id}', 'CartController@giamSoLuongSP');
     Route::get('cart/soLuongTon', 'CartController@getSoLuongTonKho');
+
+    Route::post('cart/getCount', 'CartController@getCountGioHang'); 
     
 });
 // router comments  

@@ -73,4 +73,14 @@ class CartController extends Controller
         }
         return null;
     }
+
+    public function getCountGioHang(Request $request){
+        $user_id = $request->user_id;
+
+        $value = cart::getCountGioHang($user_id);
+        if($value){
+            return response()->json($value,200);
+        }
+        return null;
+    }
 }
