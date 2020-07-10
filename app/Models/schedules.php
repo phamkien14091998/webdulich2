@@ -120,6 +120,11 @@ class schedules extends Model
     //delete schedule
     public static function deleteScheduleById($trip_id){
 
+        DB::table('comments')->where('trip_id','=',$trip_id)
+        ->delete();
+        DB::table('friends')->where('trip_id','=',$trip_id)
+        ->delete();
+        
         return self::where('trip_id','=',$trip_id)
                 ->delete();
     }

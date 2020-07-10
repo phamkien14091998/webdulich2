@@ -288,6 +288,11 @@ class posts extends Model
     }
      // delete post by id 
     public static function deletePostById($post_id){
+        DB::table('comments')->where('post_id','=',$post_id)
+        ->delete();
+        DB::table('rating')->where('post_id','=',$post_id)
+        ->delete();
+        
         return self::where('post_id','=',$post_id)
                 ->delete();
     }
