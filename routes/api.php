@@ -160,6 +160,7 @@ Route::group(['prefix'=>'schedule'],function(){
     Route::post('getNotify', 'ScheduleController@getNotify');
     Route::post('getCountNotify', 'ScheduleController@getCountNotify');
     Route::post('closeNotity', 'ScheduleController@closeNotity');
+    Route::post('list-before', 'ScheduleController@getListScheduleByUserBefore');
     
 });
 

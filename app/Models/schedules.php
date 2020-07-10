@@ -72,10 +72,13 @@ class schedules extends Model
 
     }
 
-    // lấy ra danh sách lịch trình của user đang đăng nhập
+    // lấy ra danh sách lịch trình của user đang đăng nhập (lấy ra những lịch trình chưa diễn ra)
     public static function getListScheduleByUser($user_id){
+        $day_now = date("Y-m-d");
+     
+        $query ="trips.user_id = '{$user_id}' and trips.day_end >= '{$day_now}' ";
         
-        return self::where('trips.user_id',$user_id)
+        return self::whereRaw($query)
                 ->leftJoin('users','users.user_id','=','trips.user_id')
                 ->select('trip_name','trips.created_at','trips.description','trips.trip_id','day_start','day_end','friends','users.user_name')
                 ->orderBy('trips.trip_id', 'desc')
@@ -242,7 +245,18 @@ class schedules extends Model
         return $sql;
 
     }
-    
+    // lấy ra danh sách lịch trình của user đang đăng nhập (lấy ra những lịch trình đã diễn ra)
+    public static function getListScheduleByUserBefore($user_id){
+        $day_now = date("Y-m-d");
+     
+        $query ="trips.user_id = '{$user_id}' and trips.day_end < '{$day_now}' ";
+        
+        return self::whereRaw($query)
+                ->leftJoin('users','users.user_id','=','trips.user_id')
+                ->select('trip_name','trips.created_at','trips.description','trips.trip_id','day_start','day_end','friends','users.user_name')
+                ->orderBy('trips.trip_id', 'desc')
+                ->get();
+    } 
 
  
 }
